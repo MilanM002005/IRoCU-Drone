@@ -1,3 +1,6 @@
+# To test connection to drone. First it changes mode to stabilize and then arms the drone.
+
+
 from dronekit import connect, VehicleMode
 import time
 

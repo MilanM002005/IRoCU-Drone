@@ -1,3 +1,5 @@
+#Simple take off script using no guided gps mode and then land
+
 from dronekit import connect, VehicleMode
 import time
 
@@ -8,7 +10,7 @@ vehicle = connect('/dev/ttyACM0', baud=115200, wait_ready=True)
 print("Connected")
 
 print("Switching to GUIDED_NOGPS mode")
-vehicle.mode = VehicleMode("GUIDED_NOGPS")
+vehicle.mode = VehicleMode("STABILIZE")
 
 time.sleep(3)
 
