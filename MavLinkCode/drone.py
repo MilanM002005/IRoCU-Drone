@@ -165,7 +165,7 @@ class Drone:
     # Telemetry - EKF (fused)
     # -------------------------
 
-    def get_ekf_altitude(self, timeout=0.2):
+    '''def get_ekf_altitude(self, timeout=0.2):
         """Height above ground, as fused by EKF3 - sourced from the
         rangefinder if EK3_SRC1_POSZ=2 on this vehicle."""
 
@@ -178,7 +178,24 @@ class Drone:
         if msg is None:
             return None
 
-        return -msg.z
+        return -msg.z'''
+        
+    def get_ekf_altitude(self, timeout=0.2):
+        msg = self.master.recv_match(
+            type="DISTANCE_SENSOR",
+            blocking=True,
+            timeout=timeout
+        )
+
+        if msg is None:
+            return None
+
+        distance = msg.current_distance / 100.0
+
+        if distance <= 0:
+            return None
+
+        return distance
 
     def get_climb_rate(self, timeout=0.2):
 
